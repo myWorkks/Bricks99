@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marolix.Bricks99.dto.UserLoginDTO;
 import com.marolix.Bricks99.exception.Bricks99Exception;
-import com.marolix.Bricks99.service.UserLoginService;
+import com.marolix.Bricks99.service.SellerService;
 
 @RestController
 @RequestMapping(value = "login-api")
 public class UserLoginAPI {
 
 	@Autowired
-	private UserLoginService userLoginService;
+	private SellerService userLoginService;
 
 	@PostMapping(value = "/login")
 	public ResponseEntity<String> validLogin(@RequestBody UserLoginDTO loginDTO) throws Bricks99Exception {
