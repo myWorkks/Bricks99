@@ -1,10 +1,19 @@
 package com.marolix.Bricks99.dto;
 
-public class AddressDTO {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+public class SellerAddressDTO {
+	@NotNull(message="{address.line1.empty}")
+	@Pattern(regexp = "([A-Za-z0-9,-]+)",message="{address.line1.invalid}")
 	private String addressLine1;
+	@NotNull(message="{address.line2.empty}")
 	private String addressLine2;
+	@NotNull(message="{address.city.empty}")
 	private String city;
-	private String State;
+	@NotNull(message="{address.state.empty}")
+	private String state;
+	@NotNull(message="{address.pincode.empty}")
 	private String pincode;
 
 	public String getAddressLine1() {
@@ -31,12 +40,14 @@ public class AddressDTO {
 		this.city = city;
 	}
 
+
+
 	public String getState() {
-		return State;
+		return state;
 	}
 
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 
 	public String getPincode() {

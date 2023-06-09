@@ -18,7 +18,7 @@ public class SellerRegistration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "registration_id")
-	private Integer seller_id;
+	private Integer sellerId;
 	private String firstName;
 	private String lastName;
 	@Column(name = "email_id")
@@ -27,17 +27,9 @@ public class SellerRegistration {
 	private String password;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id", unique = true)
-	private Address address;
+	private SellerAddress address;
 
-
-	public Integer getSeller_id() {
-		return seller_id;
-	}
-
-	public void setSeller_id(Integer seller_id) {
-		this.seller_id = seller_id;
-	}
-@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private SellerStatus status;
 
 	public SellerStatus getStatus() {
@@ -88,12 +80,21 @@ public class SellerRegistration {
 		this.password = password;
 	}
 
-	public Address getAddress() {
+	public SellerAddress getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(SellerAddress address) {
 		this.address = address;
 	}
+
+	public Integer getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
+	}
+	
 
 }

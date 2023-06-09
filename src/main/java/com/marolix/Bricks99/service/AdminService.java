@@ -14,4 +14,8 @@ public interface AdminService {
 	public void approveAllSellers() throws Bricks99Exception;
 
 	public void approveSeller(Integer seller_id) throws Bricks99Exception;
+
+	public void rejectSeller(Integer seller_id) throws Bricks99Exception;
+
+	public void rejectAllSellers() throws Bricks99Exception;
 }

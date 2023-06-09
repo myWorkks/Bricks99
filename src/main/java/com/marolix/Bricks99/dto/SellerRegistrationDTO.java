@@ -1,15 +1,34 @@
 package com.marolix.Bricks99.dto;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.marolix.Bricks99.entity.SellerAddress;
+import com.marolix.Bricks99.entity.SellerRegistration;
+import com.marolix.Bricks99.entity.SellerStatus;
 
 public class SellerRegistrationDTO {
-	@NotNull
+
+	private Integer sellerId;
+	@NotNull(message = "{seller.fname.empty}")
+	@Pattern(regexp = "([A-Z][a-z]+)([ ][A-Z][a-z]+)*", message = "{seller.fname.invalid}")
 	private String firstName;
+	@NotNull(message = "{seller.lname.empty}")
+	@Pattern(regexp = "([A-Z][a-z]+)([ ][A-Z][a-z]+)*", message = "{seller.lname.invalid}")
 	private String lastName;
+	@Email(message = "{seller.email.invalid}")
+	@NotNull(message = "{seller.email.empty}")
 	private String email;
+	@NotNull(message = "{seller.contact.null}")
 	private String contact;
+	@NotNull(message = "{seller.password.null}")
 	private String password;
-	private AddressDTO address;
+	@NotNull(message = "{seller.role.empty}")
+	private UserRole role;
+	@Valid
+	private SellerAddressDTO address;
 
 	public String getFirstName() {
 		return firstName;
@@ -51,12 +70,68 @@ public class SellerRegistrationDTO {
 		this.password = password;
 	}
 
-	public AddressDTO getAddress() {
+	public SellerAddressDTO getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressDTO address) {
+	public void setAddress(SellerAddressDTO address) {
 		this.address = address;
+	}
+
+	public Integer getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public static SellerRegistrationDTO entityToDTO(SellerRegistration p) {
+		SellerRegistrationDTO dto = new SellerRegistrationDTO();
+		dto.setSellerId(p.getSellerId());
+		dto.setFirstName(p.getFirstName());
+		dto.setLastName(p.getLastName());
+		dto.setContact(p.getContact());
+		dto.setEmail(p.getEmail());
+
+		SellerAddressDTO aDTO = new SellerAddressDTO();
+		SellerAddress a = p.getAddress();
+		aDTO.setAddressLine1(a.getAddressLine1());
+		aDTO.setAddressLine2(a.getAddressLine2());
+		aDTO.setCity(a.getCity());
+		aDTO.setPincode(a.getPincode());
+		aDTO.setState(a.getState());
+		dto.setAddress(aDTO);
+		return dto;
+
+	}
+
+	public static SellerRegistration dtoToEntity(SellerRegistrationDTO sellerDTO) {
+
+		SellerRegistration newSR = new SellerRegistration();
+		newSR.setContact(sellerDTO.getContact());
+		newSR.setEmail(sellerDTO.getEmail());
+		newSR.setFirstName(sellerDTO.getFirstName());
+		newSR.setLastName(sellerDTO.getLastName());
+		newSR.setStatus(SellerStatus.PENDING);
+		newSR.setPassword(sellerDTO.getPassword());
+		SellerAddress address = new SellerAddress();
+		SellerAddressDTO adto = sellerDTO.getAddress();
+		address.setAddressLine1(adto.getAddressLine1());
+		address.setAddressLine2(adto.getAddressLine2());
+		address.setCity(adto.getCity());
+		address.setState(adto.getState());
+		address.setPincode(adto.getPincode());
+		newSR.setAddress(address);
+		return newSR;
 	}
 
 }

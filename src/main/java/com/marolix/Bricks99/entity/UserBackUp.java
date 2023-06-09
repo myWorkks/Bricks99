@@ -3,33 +3,44 @@ package com.marolix.Bricks99.entity;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.marolix.Bricks99.dto.UserRole;
 
 @Entity
-@Table(name = "user_login")
-public class UserLogin {
+@Table(name = "user_backup_data")
+public class UserBackUp {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userId;
-	@Enumerated(EnumType.STRING)
-	private UserRole userRole;
+	private Integer user_id;
+	private String email;
+	private long phoneNumber;
 	private String userName;
 	private String password;
+	@Enumerated(EnumType.STRING)
+	private UserRole userRole;
 
-	private String email;
-	private String contact;
-
-	public Integer getUserId() {
-		return userId;
+	public Integer getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(Integer user_id) {
+	    this.user_id = user_id;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public long getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getUserName() {
@@ -55,21 +66,4 @@ public class UserLogin {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
 }

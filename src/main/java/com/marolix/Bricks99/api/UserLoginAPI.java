@@ -21,7 +21,7 @@ public class UserLoginAPI {
 
 	@PostMapping(value = "/login")
 	public ResponseEntity<String> validLogin(@RequestBody UserLoginDTO loginDTO) throws Bricks99Exception {
-		//System.out.println(loginDTO);
+	
 		String b = userLoginService.validLogin(loginDTO);
 		return new ResponseEntity<>(b, HttpStatus.OK);
 	}
